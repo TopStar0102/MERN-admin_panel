@@ -1,0 +1,134 @@
+
+______________________Authentication_____________________________________________
+
+ - Register User
+	POST /api/user/register
+	Request Params:
+		name(string): User name consists of between 6 ~ 255 characters
+		email(string): User email
+		password(String)
+		role_id(number): you can make the options on frontend side and send the value of option to backend	
+	Response:
+		error_msg - if there is a user with the same email
+		data - Success
+-Login User
+	POST /api/user/login
+	Request Params:
+		email(string):
+		password(string):	
+	Response:
+		access_token: if Successs
+		error_msg: If fail
+-Verify User
+	You have to must pass this step, then you can login the site
+
+	POST /api/user/verify
+	Request Params:
+		token(string): it get saved in toke collection when user login in 
+		email(string)	
+	Response:
+		data: success message
+		error_msg: if fail
+
+	if you pass this step, isActive column in user clloections becomes true(when user login in, isActive get set wth false)
+- Resend verify code
+	You can use this step, when you want to active user again.
+
+	POST /api/user/resend-verification-token
+	Reeusts Params:
+		email(string)
+	Response:
+		error_msg: if fail
+		data: if success
+- Reset password
+	POST /api/user/password-reset
+	Request Prams:
+		email(string)
+		password(string) - it's new password
+		token(string) - you can get this toke through below step
+		POST /api/user/send-password-reset-token
+		Request Prams:
+			emaiL(string): it's user email you want to change password
+
+______________________User_____________________________________________
+- Get All Users
+	GET /api/user/getAllUsers
+	Request Params:
+		None
+	Response:
+		data: all user info in database
+-GEt Single User
+	GET /api/user/single/:id
+	Request Params:
+		id(number) : its user id
+	Reponse:
+		data: single user data
+- DELETE User
+	GET /api/user/delete/:id
+	Request Params:
+		id(number) : its user id
+	Reponse:
+		data: success message
+		error_msg: if fail
+-  Edit User
+	GET api/user/edit-user
+	Request Params:
+		id(number) : its user id
+	Reponse:
+		data: edited user data
+		error_msg: if fail
+- Get Logined user	
+	GET api/user/me
+	Request Params:
+		id(number) : its user id
+	Reponse:
+		data: edited user data
+		error_msg: if fail
+- Get Actived User
+	GET api/user/active
+	Request Params:
+		isActive: true
+	Reponse:
+		data: Actived users data
+		error_msg: if fail
+______________________Role_____________________________________________
+This steps will pass the admin middleware. So another users can't pass this step.
+- Create Role
+	POST /api/role/
+	Request Params:
+		name(string): role name
+	Respnse:
+		data: if success	
+		message: if fail
+- Get all of the roles
+	GET /api/role/
+	Request Prams:
+		None
+	Response:
+		data: all of the rols in role collection if success		
+		message: if fail
+- Get single role	
+	GET /api/role/:id	
+	Request Params:
+		id(numbder)
+	Response:
+		data: sigle role data if succes
+		message: if fails
+-Edit Role	
+	PUT /api/role/:id
+	Request Params:
+		id(numbder)
+	Response:
+		message
+- Delete Single Role
+	DELETE /api/role/:id
+	Request Params:
+		id(numbder)
+	Response:
+		message
+Delete All of the roles
+	DELETE /api/roles/
+	Request Params:
+		None
+	Response:
+		message

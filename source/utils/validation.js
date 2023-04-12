@@ -6,7 +6,7 @@ const registerValidation = (data) => {
     name: Joi.string().min(6).required(),
     email: Joi.string().min(6).required().email(),
     password: Joi.string().min(6).required(),
-    role: Joi.string().required(),
+    role_id: Joi.string().required(),
     isActive: Joi.boolean()
   });
 
@@ -18,7 +18,7 @@ const userEditValidation = (data) => {
   const schema = Joi.object({
     name: Joi.string().min(6).required(),
     email: Joi.string().min(6).required().email(),
-    role: Joi.string().required(),
+    role_id: Joi.string().required(),
     isActive: Joi.boolean().required(),
     _id: Joi.string().required()
   });

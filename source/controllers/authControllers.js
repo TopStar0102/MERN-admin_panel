@@ -29,6 +29,8 @@ const validation = {
 };
 
 const handleValidation = (body, res, type) => {
+  console.log(body, type);
+  console.log(validation[type]);
   const { error } = validation[type](body);
   if (error) {
     throw Error(error.details[0].message);
@@ -36,7 +38,6 @@ const handleValidation = (body, res, type) => {
 };
 
 const registerUser = async (req, res) => {
-  console.log(req.body);
   try {
     await handleValidation(req.body, res, 'register');
     //   Checking if the user is already in the db

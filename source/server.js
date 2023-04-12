@@ -1,21 +1,21 @@
-/* eslint-disable no-console */
 const express = require('express');
 
 const app = express();
 
-// Import Routes
-
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-// const cors = require('cors');
+const connectDB = require('./config/db');
 const path = require('path');
 const bodyParser = require('body-parser');
-const postRoute = require('./routes/post');
+
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/user');
-
 const docsRoute = require('./routes/docs');
-const connectDB = require('./config/db');
+const homepageRoute = require('./routes/homepage');
+const aboutRoute = require('./routes/about');
+const blogRoute = require('./routes/blog');
+const testimonialsRoute = require('./routes/testimonials');
+const roleRoute = require('./routes/role');
 
 dotenv.config();
 
@@ -39,7 +39,11 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
 app.use('/api/v1', docsRoute);
-app.use('/api/post', postRoute);
+app.use('/api/homepage', homepageRoute);
+app.use('/api/about', aboutRoute);
+app.use('/api/testimonials', testimonialsRoute);
+app.use('/api/blog', blogRoute);
+app.use('/api/role', roleRoute);
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
