@@ -14,19 +14,19 @@ const {
 const ConvertIntToMonth = require('../helpers/ConvertIntToMonth');
 const User = require('../models/User');
 
-// router.get('/', getAllUsers);
-// router.get('/me', ensureAuth, getLoggedInUser);
-// router.get('/active', ensureAuth, getAllActiveUsers);
-// router.get('/single/:id', getSingleUser);
-// router.get('/delete/:id', [ensureAuth, checkAdmin], deleteUserAction);
-// router.patch('/edit-user', ensureAuth, editUserAction);
-
 router.get('/', getAllUsers);
-router.get('/me', getLoggedInUser);
-router.get('/active', getAllActiveUsers);
+router.get('/me', ensureAuth, getLoggedInUser);
+router.get('/active', ensureAuth, getAllActiveUsers);
 router.get('/single/:id', getSingleUser);
-router.get('/delete/:id', deleteUserAction);
-router.patch('/edit-user', editUserAction);
+router.get('/delete/:id', [ensureAuth, checkAdmin], deleteUserAction);
+router.patch('/edit-user', ensureAuth, editUserAction);
+
+// router.get('/', getAllUsers);
+// router.get('/me', getLoggedInUser);
+// router.get('/active', getAllActiveUsers);
+// router.get('/single/:id', getSingleUser);
+// router.get('/delete/:id', deleteUserAction);
+// router.patch('/edit-user', editUserAction);
 
 // router.get(
 //   '/group/group-by-month',

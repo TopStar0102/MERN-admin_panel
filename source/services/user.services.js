@@ -25,33 +25,10 @@ const getAndEditUser = async (query, newData) => {
   }
 };
 
-// const getSingleUserService = async (query) => {
-//   try {
-//     const user = await User.findOne(query).select('+password');
-//     return user;
-//   } catch (err) {
-//     throw Error(err);
-//   }
-// };
 const getSingleUserService = async (query) => {
   try {
-    User.aggregate([
-      {
-        $match: query
-      },
-      {
-        $lookup:
-        {
-          from: 'roles',
-          localField: 'role_id',
-          foreignField: '_id',
-          as: 'roledetails'
-        }
-      }
-    ]).toArray(function (err, res) {
-      if (err) throw err;
-      return JSON.stringify(res);
-    })
+    const user = await User.findOne(query).select('+password');
+    return user;
   } catch (err) {
     throw Error(err);
   }
